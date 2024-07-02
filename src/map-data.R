@@ -10,10 +10,9 @@ source("src/load-data.R")
 # a bit of basic rearranging of things
 d.trap <- d %>% mutate(day = day(date), month = month(date), year = year(date)) %>%
   mutate(cat = species == "Cat") %>%
+  filter(!is.na(Lat)) %>%
   group_by(year, month) %>%
-  mutate(agg.date = ymd(paste(year, month, "01", sep = "-"))) %>%
-  filter(!is.na(Lat)) %>% # note we lose 1400 observations with this
-  filter(Lat < -35.7) # a couple of spatial outliers -- data entry issues
+  mutate(agg.date = ymd(paste(year, month, "01", sep = "-"))) 
 
 d.trap$cat[is.na(d.trap$cat)] <- FALSE
 

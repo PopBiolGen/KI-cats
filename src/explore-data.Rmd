@@ -23,8 +23,6 @@ The data report trap nights on the Dudley peninsula.  I am assuming there is a r
 Under this assumption, we can get at catch per unit effort simply through summarising the data, like so.
 
 ```{r cpue, warning=FALSE}
-library(lubridate)
-
 # get catch per unit effort
 cpue <- d %>% mutate(day = day(date), month = month(date), year = year(date)) %>%
   mutate(cat = species == "Cat") %>%
@@ -40,7 +38,6 @@ Let's just check a few things.  First, does effort look correct, across time?
 ```{r effort-time}
 plot(effort~date, data = cpue, type = "b")
 ```
-Looks like a massive increase in effort July - Sep 2023, followed by effort dropping to 1 trap in all of October.  Is that correct?
 
 We can also plot cpue against time.
 
@@ -54,7 +51,7 @@ Which is rather dominated by the one cat that was caught with one trap in Octobe
 ss <- cpue$cpue != 1
 plot(cpue~date, data = cpue[ss,], type = "b")
 ```
-Which is interesting.  Some nice patterns in there.  Looks to be some seasonal effects and form mid-2021 a stead decrease in cpue.  But then a surprising increase in 2024, when trap effort was at an historic low.  What's going on there?  Are we flooded with cats, have the traps become wildly effective?  Is there some change in how the data are recorded?
+Which is interesting.  Some nice patterns in there.  Looks to be some seasonal effects and from mid-2021 a steady decrease in cpue.  But then a surprising increase in 2024, when trap effort was at an historic low.  What's going on there?  There is a change in how the data are recorded with a switch to celium traps.
 
 ## Space
 
